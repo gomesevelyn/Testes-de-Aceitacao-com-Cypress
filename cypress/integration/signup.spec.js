@@ -1,6 +1,6 @@
 import signup from '../pages/SignupPage' //importa a classe já instanciada
 
-describe('Cadastro', ()=>{
+describe('Signup', ()=>{
 
     //ganchos em cypress 
     beforeEach(function() {
@@ -9,7 +9,7 @@ describe('Cadastro', ()=>{
         })
     })
 
-    it('Usuário deve se tornar um deliver', function(){
+    it('User must become a deliver', function(){
         signup.go()
         signup.fillForm(this.deliver.signup)
         signup.submit()
@@ -18,7 +18,7 @@ describe('Cadastro', ()=>{
         signup.modalContentShouldBe(expectedMessage)
     })
 
-    it('Usuário com CPF inválido', function(){
+    it('User with invalid CPF', function(){
          signup.go()
          signup.fillForm(this.deliver.cpf_invalido)
          signup.submit()
