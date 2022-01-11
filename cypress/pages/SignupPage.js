@@ -3,7 +3,7 @@ class SignupPage {
 
     //função para acessar o form de cadastro
     go() {
-        cy.visit('https://buger-eats.vercel.app')
+        cy.visit('/')
         
         cy.get('a[href="/deliver"]').click() //clica no botão de cadastro
         
