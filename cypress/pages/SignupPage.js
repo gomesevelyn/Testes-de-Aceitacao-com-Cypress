@@ -52,5 +52,5 @@ class SignupPage {
     }
 }
 
-//exporta a pagina
-export default SignupPage;
+//exporta a pagina já instanciada
+export default new SignupPage;
