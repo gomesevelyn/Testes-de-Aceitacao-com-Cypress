@@ -1,7 +1,7 @@
 
 
 describe('Cadastro', ()=>{
-    it('Usuário deve se tornar um entregador', ()=>{
+    it('Usuário deve se tornar um deliver', ()=>{
         cy.viewport(1440, 900)
         cy.visit('https://buger-eats.vercel.app')
         
@@ -10,45 +10,45 @@ describe('Cadastro', ()=>{
         cy.get('#page-deliver form h1').should('have.text', 'Cadastre-se para  fazer entregas') //é um checkpoint para verificar se esta no caminho correto
 
         //massa de dados 
-        var entregador = {
-            nome: 'Evelyn Gomes', 
-            cpf:  '00000014141',
+        var deliver = {
+            name: 'Evelyn Gomes', 
+            cpf:  '000000141AB',
             email: 'evelyn@email.com.br',
             whatsapp: '16999999999',
-            endereco:{
-                cep: '14402460',
-                rua: 'Rua Mário Martins', 
-                numero: '1000',
-                complemento: 'casa',
-                bairro: 'Jardim Paulistano',
-                cidade_uf: 'Franca/SP'
+            address:{
+                postalcode: '14402460',
+                street: 'Rua Mário Martins', 
+                number: '1000',
+                details: 'casa',
+                district: 'Jardim Paulistano',
+                city_state: 'Franca/SP'
             },
-            metodo_entrega: 'Moto',
+            delivery_method: 'Moto',
             cnh: 'cnh-digital.jpg'
         }
 
-        //preenchimento dos dados do entregador
-        cy.get('input[name="name"]').type(entregador.nome)
-        cy.get('input[name="cpf"]').type(entregador.cpf)
-        cy.get('input[name="email"]').type(entregador.email)
-        cy.get('input[name="whatsapp"]').type(entregador.whatsapp)
+        //preenchimento dos dados do deliver
+        cy.get('input[name="name"]').type(deliver.name)
+        cy.get('input[name="cpf"]').type(deliver.cpf)
+        cy.get('input[name="email"]').type(deliver.email)
+        cy.get('input[name="whatsapp"]').type(deliver.whatsapp)
 
         //preenchimento do endereço
-        cy.get('input[name="postalcode"]').type(entregador.endereco.cep)
+        cy.get('input[name="postalcode"]').type(deliver.address.postalcode)
         cy.get('input[type=button][value="Buscar CEP"]').click()
-        cy.get('input[name="address-number"]').type(entregador.endereco.numero)
-        cy.get('input[name="address-details"]').type(entregador.endereco.complemento)
+        cy.get('input[name="address-number"]').type(deliver.address.number)
+        cy.get('input[name="address-details"]').type(deliver.address.details)
 
         //validacao dos campos preenchidos automaticamente pela busca de cep
-        cy.get('input[name="address"]').should('have.value', entregador.endereco.rua)
-        cy.get('input[name="district"]').should('have.value', entregador.endereco.bairro)
-        cy.get('input[name="city-uf"]').should('have.value', entregador.endereco.cidade_uf)
+        cy.get('input[name="address"]').should('have.value', deliver.address.street)
+        cy.get('input[name="district"]').should('have.value', deliver.address.district)
+        cy.get('input[name="city-uf"]').should('have.value', deliver.address.city_state)
 
         //selecionar tipo de entrega 
-        cy.contains('.delivery-method li', entregador.metodo_entrega).click()
+        cy.contains('.delivery-method li', deliver.delivery_method).click()
 
         //upload arquivo 
-        cy.get('input[accept^="image"]').attachFile('/images/' + entregador.cnh)
+        cy.get('input[accept^="image"]').attachFile('/images/' + deliver.cnh)
 
         //confirmar preeenchimento do form
         cy.get('form button[type="submit"]').click()
@@ -56,7 +56,6 @@ describe('Cadastro', ()=>{
         //validar submissão do formulario
         const expectedMessage = 'Recebemos os seus dados. Fique de olho na sua caixa de email, pois e em breve retornamos o contato.'
         cy.get('.swal2-container .swal2-html-container').should('have.text', expectedMessage)
-
     })
 
     it('Usuário com CPF inválido', ()=>{
@@ -68,45 +67,45 @@ describe('Cadastro', ()=>{
         cy.get('#page-deliver form h1').should('have.text', 'Cadastre-se para  fazer entregas') //é um checkpoint para verificar se esta no caminho correto
 
         //massa de dados 
-        var entregador = {
-            nome: 'Evelyn Gomes', 
+        var deliver = {
+            name: 'Evelyn Gomes', 
             cpf:  '000000141AB',
             email: 'evelyn@email.com.br',
             whatsapp: '16999999999',
-            endereco:{
-                cep: '14402460',
-                rua: 'Rua Mário Martins', 
-                numero: '1000',
-                complemento: 'casa',
-                bairro: 'Jardim Paulistano',
-                cidade_uf: 'Franca/SP'
+            address:{
+                postalcode: '14402460',
+                street: 'Rua Mário Martins', 
+                number: '1000',
+                details: 'casa',
+                district: 'Jardim Paulistano',
+                city_state: 'Franca/SP'
             },
-            metodo_entrega: 'Moto',
+            delivery_method: 'Moto',
             cnh: 'cnh-digital.jpg'
         }
 
         //preenchimento dos dados do entregador
-        cy.get('input[name="name"]').type(entregador.nome)
-        cy.get('input[name="cpf"]').type(entregador.cpf)
-        cy.get('input[name="email"]').type(entregador.email)
-        cy.get('input[name="whatsapp"]').type(entregador.whatsapp)
+        cy.get('input[name="name"]').type(deliver.name)
+        cy.get('input[name="cpf"]').type(deliver.cpf)
+        cy.get('input[name="email"]').type(deliver.email)
+        cy.get('input[name="whatsapp"]').type(deliver.whatsapp)
 
         //preenchimento do endereço
-        cy.get('input[name="postalcode"]').type(entregador.endereco.cep)
+        cy.get('input[name="postalcode"]').type(deliver.address.postalcode)
         cy.get('input[type=button][value="Buscar CEP"]').click()
-        cy.get('input[name="address-number"]').type(entregador.endereco.numero)
-        cy.get('input[name="address-details"]').type(entregador.endereco.complemento)
+        cy.get('input[name="address-number"]').type(deliver.address.number)
+        cy.get('input[name="address-details"]').type(deliver.address.details)
 
         //validacao dos campos preenchidos automaticamente pela busca de cep
-        cy.get('input[name="address"]').should('have.value', entregador.endereco.rua)
-        cy.get('input[name="district"]').should('have.value', entregador.endereco.bairro)
-        cy.get('input[name="city-uf"]').should('have.value', entregador.endereco.cidade_uf)
+        cy.get('input[name="address"]').should('have.value', deliver.address.street)
+        cy.get('input[name="district"]').should('have.value', deliver.address.district)
+        cy.get('input[name="city-uf"]').should('have.value', deliver.address.city_state)
 
         //selecionar tipo de entrega 
-        cy.contains('.delivery-method li', entregador.metodo_entrega).click()
+        cy.contains('.delivery-method li', deliver.delivery_method).click()
 
         //upload arquivo 
-        cy.get('input[accept^="image"]').attachFile('/images/' + entregador.cnh)
+        cy.get('input[accept^="image"]').attachFile('/images/' + deliver.cnh)
 
         //confirmar preeenchimento do form
         cy.get('form button[type="submit"]').click()
