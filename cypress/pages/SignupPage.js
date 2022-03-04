@@ -48,7 +48,9 @@ class SignupPage {
 
     //Valida msg de erro 
     alertMessageShouldBe(expectedMessage) {
-        cy.get('.alert-error').should('have.text', expectedMessage)
+        //cy.get('.alert-error').should('have.text', expectedMessage)
+        //combinaçao do localizador com o elemento
+        cy.contains('.alert-error', expectedMessage).should('be.visible') //combinação de informações quando possui mais de um elemento passa a validar a mensagem
     }
 }
 
